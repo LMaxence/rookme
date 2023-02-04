@@ -1,0 +1,7 @@
+{
+  "steps": [{
+    "name": "echoer",
+    "command": "echo $VAR world"
+  }],
+  "preCommand": "export VAR='hello'"
+}

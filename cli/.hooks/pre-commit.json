@@ -1,0 +1,6 @@
+{
+  "steps": [{
+      "name": "echoer",
+      "command": "echo \"hello word !\""
+  }]
+}
