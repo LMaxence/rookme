@@ -41,8 +41,7 @@ fn get_repo() -> Result<Repository, Error> {
 fn get_files_list(repo: Repository) -> Result<Vec<String>, Error> {
     let statuses = repo.statuses(None).unwrap();
     let mut modified_files: Vec<String> = Vec::new();
-    let mut statuses_iter = statuses.iter();
-    while let Some(status) = statuses_iter.next() {
+    for status in statuses.iter() {
         let stat = status.index_to_workdir().unwrap().status();
         if !DELTA_WHITELIST.contains(&stat) {
             continue;
