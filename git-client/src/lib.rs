@@ -15,8 +15,8 @@ static DELTA_WHITELIST: &'static [Delta] = &[Delta::Modified, Delta::Added];
 /// directory is not a git repository, or if the git repository
 /// is corrupted.
 ///
-/// https://libgit2.github.com/
-/// https://docs.rs/git2/latest/git2/
+/// - https://libgit2.github.com/
+/// - https://docs.rs/git2/latest/git2/
 pub fn get_changed_files() -> Result<Vec<String>, Error> {
     let repo = get_repo()?;
     log::debug!("Successfuly using repo at path : {:?}", repo.path());
