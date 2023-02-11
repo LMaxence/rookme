@@ -1,12 +1,8 @@
-use log;
 use std::path::Path;
 
-use git2::{Repository, Error, Delta};
+use git2::{Delta, Error, Repository};
 
-
-
-static DELTA_WHITELIST: &'static [Delta] = &[Delta::Modified, Delta::Added];
-
+static DELTA_WHITELIST: &[Delta] = &[Delta::Modified, Delta::Added];
 
 /// Uses git2 to get the list of changed files
 ///
@@ -20,13 +16,9 @@ static DELTA_WHITELIST: &'static [Delta] = &[Delta::Modified, Delta::Added];
 pub fn get_changed_files() -> Result<Vec<String>, Error> {
     let repo = get_repo()?;
     log::debug!("Successfuly using repo at path : {:?}", repo.path());
-    let modified_files = get_files_list(repo)?; 
+    let modified_files = get_files_list(repo)?;
     Ok(modified_files)
 }
-
-
-// privates functions
-// ------------------
 
 /// Repository::discover will try to locate the git repository
 /// starting from the working directory and going up to the root

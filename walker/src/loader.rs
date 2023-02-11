@@ -1,4 +1,3 @@
-use serde;
 use std::{error::Error, fs::File, io::BufReader, path::PathBuf};
 
 #[derive(serde::Deserialize, Debug)]
@@ -14,7 +13,7 @@ pub struct RawStep {
     /**
      *  A pattern string describing which changed files will trigger this step
      */
-    #[serde(rename="onlyOn")]
+    #[serde(rename = "onlyOn")]
     pub only_on: Option<String>,
     /**
      *  Should this step be awaited before starting the next one
@@ -35,7 +34,7 @@ pub struct RawStepsCollection {
     /**
      * A boolean denoting whether a virtualenv is started of not for this hook (eg for Python)
      */
-    #[serde(rename="preCommand")]
+    #[serde(rename = "preCommand")]
     pub pre_command: Option<String>,
 }
 
