@@ -1,6 +1,8 @@
 {
-  "steps": [{
-      "name": "echoer",
-      "command": "echo \"hello word !\""
-  }]
+  "steps": [
+    {
+      "name": "test CLI",
+      "command": "cargo test"
+    }
+  ]
 }
