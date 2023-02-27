@@ -2,14 +2,14 @@ use crate::loader::RawStepsCollection;
 
 #[derive(Debug)]
 pub struct Step {
-  /**
-   *  The named of the step. Displayed in the UI and used in it to index steps and hooks
-   */
-  pub name: String,
-  /**
-   *  The command that will be invoked
-   */
-  pub command: String
+    /**
+     *  The named of the step. Displayed in the UI and used in it to index steps and hooks
+     */
+    pub name: String,
+    /**
+     *  The command that will be invoked
+     */
+    pub command: String,
 }
 
 #[derive(Debug)]
@@ -21,22 +21,22 @@ pub struct StepsCollection {
     /**
      * A boolean denoting whether a virtualenv is started of not for this hook (eg for Python)
      */
-    pub pre_command: Option<String>
+    pub pre_command: Option<String>,
 }
 
 pub fn process_from_raw_collection(raw_steps: &RawStepsCollection) -> StepsCollection {
-  let mut steps: Vec<Step> = Vec::new();
+    let mut steps: Vec<Step> = Vec::new();
 
-  for raw_step in raw_steps.steps.as_slice() {
-    let step = Step {
-      name: raw_step.name.clone(),
-      command: raw_step.command.clone()
-    };
-    steps.push(step)
-  }
+    for raw_step in raw_steps.steps.as_slice() {
+        let step = Step {
+            name: raw_step.name.clone(),
+            command: raw_step.command.clone(),
+        };
+        steps.push(step)
+    }
 
-  return StepsCollection { 
-    steps, 
-    pre_command: raw_steps.pre_command.clone()
-  };
+    StepsCollection {
+        steps,
+        pre_command: raw_steps.pre_command.clone(),
+    }
 }

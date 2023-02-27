@@ -1,7 +1,6 @@
 mod loader;
 mod processor;
 
-
 use glob::glob;
 
 pub fn walk(pattern: &str) -> Vec<processor::StepsCollection> {
@@ -15,5 +14,5 @@ pub fn walk(pattern: &str) -> Vec<processor::StepsCollection> {
             Err(e) => println!("{:?}", e),
         }
     }
-    return steps_collections;
+    steps_collections
 }
