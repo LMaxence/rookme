@@ -58,8 +58,8 @@ fn get_files_with_status(repo: Repository) -> Result<Vec<String>, Error> {
         if !TARGET_STATUSES.contains(&stat) {
             continue;
         }
-        let path = status.path().unwrap();
-        modified_files.push(path.to_string());
+        let pathbuf = std::fs::canonicalize(Path::new(status.path().unwrap())).unwrap();
+        modified_files.push(pathbuf.to_str().unwrap().to_string());
     }
     Ok(modified_files)
 }
