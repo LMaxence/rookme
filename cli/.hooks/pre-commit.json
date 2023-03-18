@@ -1,6 +1,6 @@
 {
   "steps": [{
       "name": "echoer",
-      "command": "echo \"hello word !\""
+      "command": "echo $(pwd)"
   }]
 }

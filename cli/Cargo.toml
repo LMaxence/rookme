@@ -8,5 +8,6 @@ edition = "2021"
 [dependencies]
 env_logger = "0.10.0"
 log = "0.4.17"
-walker = { path = "../walker" }
-runner = { path = "../runner" }
+walker = { path = "../packages/walker" }
+runner = { path = "../packages/runner" }
+git_client = { path = "../packages/git_client" }

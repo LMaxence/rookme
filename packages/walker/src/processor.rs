@@ -21,7 +21,11 @@ pub struct StepsCollection {
     /**
      * A boolean denoting whether a virtualenv is started of not for this hook (eg for Python)
      */
-    pub pre_command: Option<String>
+    pub pre_command: Option<String>,
+    /**
+     * A path from where the step is executed (cwd)
+     */
+    pub cwd: String,
 }
 
 pub fn process_from_raw_collection(raw_steps: &RawStepsCollection) -> StepsCollection {
@@ -37,6 +41,7 @@ pub fn process_from_raw_collection(raw_steps: &RawStepsCollection) -> StepsColle
 
   return StepsCollection { 
     steps, 
-    pre_command: raw_steps.pre_command.clone()
+    pre_command: raw_steps.pre_command.clone(),
+    cwd: raw_steps.cwd.clone()
   };
 }
