@@ -1,9 +1,12 @@
-use log::{debug, error};
-use subprocess::{Exec, Redirection, ExitStatus};
+use std::path::Path;
 
-pub fn execute(cmdstr: &String) -> bool {
+use log::{debug, error};
+use subprocess::{Exec, ExitStatus, Redirection};
+
+pub fn execute(cmdstr: &String, cwd: &Path) -> bool {
     debug!("Executing: `{}`", cmdstr);
     let result = Exec::shell(cmdstr)
+        .cwd(cwd)
         .stdout(Redirection::Pipe)
         .stderr(Redirection::Merge)
         .capture()

@@ -1,8 +1,3 @@
 [workspace]
 
-members = [
-  "cli",
-  "walker",
-  "git-client",
-  "runner"
-]
+members = ["cli", "packages/*"]
