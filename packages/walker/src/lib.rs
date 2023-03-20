@@ -15,7 +15,7 @@ pub fn walk() -> Vec<processor::StepsCollection> {
     };
     match_pattern.push_str("/**/.hooks/pre-commit.json");
 
-    let _changed_files = match git_client::get_changed_files() {
+    let changed_files = match git_client::get_changed_files() {
         Ok(files) => files,
         Err(error) => {
             log::error!("Encountered error when loading changed files from git.");
@@ -36,7 +36,12 @@ pub fn walk() -> Vec<processor::StepsCollection> {
     for path in hooks_files {
         match path {
             Ok(p) => {
-                log::info!("{:?}", p);
+                if !hook_is_active(&p, &changed_files) {
+                    log::info!("{:?} is not active", p);
+                    
+                    continue;
+                }
+                log::info!("{:?} is active", p);
                 let raw_collection = loader::read_from_file(p).unwrap();
 
                 log::info!("{:?}", raw_collection);
@@ -50,4 +55,16 @@ pub fn walk() -> Vec<processor::StepsCollection> {
     }
 
     steps_collections
+}
+
+
+fn hook_is_active(hook_path: &std::path::Path, changed_files: &Vec<String>) -> bool {
+    for file in changed_files {
+        let candidate = hook_path.parent().unwrap().parent().unwrap();
+        log::trace!("Checking if {:?} is a parent dir of {:?}", candidate, file);
+        if file.starts_with(candidate.to_str().unwrap()) {
+            return true;
+        }
+    }
+    false
 }
