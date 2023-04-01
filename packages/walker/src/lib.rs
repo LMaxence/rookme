@@ -38,7 +38,7 @@ pub fn walk() -> Vec<processor::StepsCollection> {
             Ok(p) => {
                 if !hook_is_active(&p, &changed_files) {
                     log::info!("{:?} is not active", p);
-                    
+
                     continue;
                 }
                 log::info!("{:?} is active", p);
@@ -56,7 +56,6 @@ pub fn walk() -> Vec<processor::StepsCollection> {
 
     steps_collections
 }
-
 
 fn hook_is_active(hook_path: &std::path::Path, changed_files: &Vec<String>) -> bool {
     for file in changed_files {
