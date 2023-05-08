@@ -22,7 +22,7 @@ fn run_hooks() -> bool {
                 Some(pre) => format!("{} && {}", pre, step.command),
                 None => step.command,
             };
-            log::info!("\tRunning command: `{}`", final_command);
+            log::info!("Running command: `{}`", final_command);
             if !runner::execute(&final_command, Path::new(&steps_collection.cwd)) {
                 // here the command has failed
                 // TODO: think about a proper way to make it working with parallel executions

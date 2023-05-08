@@ -44,8 +44,6 @@ pub fn walk() -> Vec<processor::StepsCollection> {
                 log::info!("{:?} is active", p);
                 let raw_collection = loader::read_from_file(p).unwrap();
 
-                log::info!("{:?}", raw_collection);
-
                 steps_collections.push(processor::process_from_raw_collection(&raw_collection));
             }
             Err(error) => {
