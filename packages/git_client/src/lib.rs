@@ -1,4 +1,4 @@
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use git2::{Error, Repository, Status};
 
@@ -19,7 +19,7 @@ static TARGET_STATUSES: &[Status] = &[
 ///
 /// - https://libgit2.github.com/
 /// - https://docs.rs/git2/latest/git2/
-pub fn get_changed_files() -> Result<Vec<String>, Error> {
+pub fn get_changed_files() -> Result<Vec<PathBuf>, Error> {
     let repo = get_repo()?;
     log::debug!("Successfuly using repo at path : {:?}", repo.path());
     get_files_with_status(repo)
@@ -49,9 +49,9 @@ pub fn get_repo() -> Result<Repository, Error> {
 /// Returns the list of files that have a status in the DELTA_WHITELIST
 ///
 /// https://docs.rs/git2/latest/git2/enum.Delta.html
-fn get_files_with_status(repo: Repository) -> Result<Vec<String>, Error> {
+fn get_files_with_status(repo: Repository) -> Result<Vec<PathBuf>, Error> {
     let statuses = repo.statuses(None).unwrap();
-    let mut modified_files: Vec<String> = Vec::new();
+    let mut modified_files: Vec<PathBuf> = Vec::new();
 
     for status in statuses.iter() {
         let stat = status.status();
@@ -59,7 +59,7 @@ fn get_files_with_status(repo: Repository) -> Result<Vec<String>, Error> {
             continue;
         }
         let path = status.path().unwrap();
-        modified_files.push(path.to_string());
+        modified_files.push(PathBuf::from(path.to_string()));
     }
     Ok(modified_files)
 }
