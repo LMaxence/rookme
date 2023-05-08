@@ -8,6 +8,11 @@ static TARGET_STATUSES: &[Status] = &[
     Status::WT_DELETED,
     Status::WT_RENAMED,
     Status::WT_TYPECHANGE,
+    Status::INDEX_NEW,
+    Status::INDEX_MODIFIED,
+    Status::INDEX_DELETED,
+    Status::INDEX_RENAMED,
+    Status::INDEX_TYPECHANGE,
 ];
 
 /// Uses git2 to get the list of changed files
